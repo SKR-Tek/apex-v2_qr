@@ -9,41 +9,31 @@
     <script>
       // ==========================================
       // EDIT ONLY THIS ONE LINE TO CHANGE THE TARGET:
-      const TARGET_URL = "https://www.google.com/aclk?sa=L&pf=1&ai=DChsSEwj9h-HI2OeXAxWemWYCHdFiNkkYACICCAEQARoCc20&co=1&ase=2&gclid=CjwKCAjwxpvXBhASEiwAue4B4SHbMk9V7B2aXxGzf3J_5rmdqUZfvbAqoVemnqffymL5xU5AlwCsABoCzv4QAvD_BwE&cid=CAAS3QHkaOeQabwA1XUybRGGHT2wX5dny_m-M8F9c-7_XURf57s9-jMQtN3FzRcHwmnflNhkMwgUBBheU0llmpZQ0RhPNMcXiUy18bz4j-dPEws1fgmcYtmghDXzxUEXZcGsGXNEgaFdmglk7RnpOnjJkO5l1hBgQw9vF5YB7Cy-UjkV1OYvOxDVznGMGe_7GoA19_Dxr5nvFyB3YDCJUcRT-IHxETVjxyBpW1jveMo27-OydnzWF53LI1QxoGmTgvS_ukEAx6hfsYOK1tO9xsTlC7R0CXC61wPkFHTUgxAsjA&cce=2&category=acrcp_v1_32&sig=AOD64_1kmKPJLLeZAWRILGRdJiZIYKtolQ&q&nis=4&adurl=https://robu.in/?gad_source%3D1%26gad_campaignid%3D19588302958%26gbraid%3D0AAAAADvLFWdcnKBGOG4xbfR9RmaPkx2FU%26gclid%3DCjwKCAjwxpvXBhASEiwAue4B4SHbMk9V7B2aXxGzf3J_5rmdqUZfvbAqoVemnqffymL5xU5AlwCsABoCzv4QAvD_BwE&ved=2ahUKEwiT6NvI2OeXAxUui-EIHaMgBBUQ0Qx6BAgjEAE";
+      const TARGET_URL = "https://study.iitm.ac.in/es";
       // ==========================================
 
-      function performRedirect() {
-        // Appends a random timestamp to bypass GitHub API cache
+      // Step 1: If normal browser tab opened a cached URL without '?nocache=',
+      // force the browser to reload a fresh un-cached URL first:
+      if (!window.location.search.includes("nocache=")) {
+        window.location.replace(window.location.pathname + "?nocache=" + Date.now());
+      } else {
+        // Step 2: Now that the browser is guaranteed to be on a fresh page, fetch & redirect:
         fetch("https://api.github.com/repos/SKR-Tek/apex-v2_QR/contents/index.html?t=" + Date.now(), {
           headers: { "Accept": "application/vnd.github.v3.raw" },
           cache: "no-store"
         })
-        .then(response => {
-          if (!response.ok) throw new Error("Network response failed");
-          return response.text();
-        })
-        .then(htmlText => {
-          // Extracts the updated TARGET_URL string from the live raw file
-          const match = htmlText.match(/const\s+TARGET_URL\s*=\s*["']([^"']+)["']/);
-          const finalUrl = match ? match[1] : TARGET_URL;
-          window.location.replace(finalUrl);
-        })
-        .catch(() => {
-          // Fallback if API rate limit or offline occurs
-          window.location.replace(TARGET_URL);
-        });
+          .then(r => {
+            if (!r.ok) throw new Error("Fallback");
+            return r.text();
+          })
+          .then(html => {
+            const match = html.match(/const\s+TARGET_URL\s*=\s*["']([^"']+)["']/);
+            window.location.replace(match ? match[1] : TARGET_URL);
+          })
+          .catch(() => {
+            window.location.replace(TARGET_URL);
+          });
       }
-
-      // Forces execution even if pulled from mobile browser RAM cache
-      window.addEventListener("pageshow", (event) => {
-        if (event.persisted) {
-          window.location.reload();
-        } else {
-          performRedirect();
-        }
-      });
-
-      performRedirect();
     </script>
   </head>
   <body style="background-color: #000000;"></body>
