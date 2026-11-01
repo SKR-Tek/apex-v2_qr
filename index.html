@@ -8,24 +8,12 @@
     <meta http-equiv="Expires" content="0">
     <script>
       // ==========================================
-      // ==========================================
-      // ==========================================
-      // ==========================================
-      
       // EDIT ONLY THIS ONE LINE BELOW:
-      
-      
-      const TARGET_URL = "https://study.iitm.ac.in/es/";
-      
-      
-      // ==========================================
-      // ==========================================
-      // ==========================================
+      const TARGET_URL = "https://www.youtube.com/";
       // ==========================================
 
       function go() {
-        // Updated to point to your correct repository: SKR-Tek/apex-v2_QR
-        fetch("https://api.github.com/repos/SKR-Tek/apex-v2_QR/contents/index.html?t=" + Date.now(), {
+        fetch("https://api.github.com/repos/skr-tek.github.io/apex-v2_QR/contents/index.html?t=" + Date.now(), {
           headers: { "Accept": "application/vnd.github.v3.raw" },
           cache: "no-store"
         })
@@ -42,6 +30,7 @@
           });
       }
 
+      // Forces mobile browsers to re-run even if pulled from RAM memory
       window.addEventListener("pageshow", go);
       go();
     </script>
