@@ -8,23 +8,13 @@
     <meta http-equiv="Expires" content="0">
     <script>
       // ==========================================
-      // ==========================================
-      // ==========================================
-
-      //"https://skr-tek.github.io/apex-v2_QR" THIS IS THE STATIC LINK
-      
-      // EDIT ONLY THIS ONE LINE BELOW:
-      
-      
+      // EDIT ONLY THIS ONE LINE BELOW TO CHANGE TARGET:
       const TARGET_URL = "https://study.iitm.ac.in/es";
-      
-      
-      // ==========================================
-      // ==========================================
       // ==========================================
 
       function go() {
-        fetch("https://api.github.com/repos/skr-tek.github.io/apex-v2_QR/contents/index.html?t=" + Date.now(), {
+        // FIXED: Correct owner "SKR-Tek" and repo "apex-v2_QR"
+        fetch("https://api.github.com/repos/SKR-Tek/apex-v2_QR/contents/index.html?t=" + Date.now(), {
           headers: { "Accept": "application/vnd.github.v3.raw" },
           cache: "no-store"
         })
