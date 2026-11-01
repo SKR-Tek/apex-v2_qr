@@ -7,23 +7,25 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <script>
-      // =========================================
-      // =========================================
-      // =========================================
-      // =========================================
+      // ==========================================
+      // ==========================================
+      // ==========================================
+      // ==========================================
+      
       // EDIT ONLY THIS ONE LINE BELOW:
-
+      
       
       const TARGET_URL = "https://study.iitm.ac.in/es/";
-
       
-      //==========================================
-      // =========================================
-      // =========================================
-      // =========================================
+      
+      // ==========================================
+      // ==========================================
+      // ==========================================
+      // ==========================================
 
       function go() {
-        fetch("https://api.github.com/repos/NANDHA0804/v2/contents/index.html?t=" + Date.now(), {
+        // Updated to point to your correct repository: SKR-Tek/apex-v2_QR
+        fetch("https://api.github.com/repos/SKR-Tek/apex-v2_QR/contents/index.html?t=" + Date.now(), {
           headers: { "Accept": "application/vnd.github.v3.raw" },
           cache: "no-store"
         })
@@ -40,7 +42,6 @@
           });
       }
 
-      // Forces mobile browsers to re-run even if pulled from RAM memory
       window.addEventListener("pageshow", go);
       go();
     </script>
