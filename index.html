@@ -18,7 +18,7 @@
         window.location.replace(window.location.pathname + "?nocache=" + Date.now());
       } else {
         // Step 2: Now that the browser is guaranteed to be on a fresh page, fetch & redirect:
-        fetch("https://api.github.com/repos/SKR-Tek/apex-v2_QR/contents/index.html?t=" + Date.now(), {
+        fetch("https://api.github.com/repos/SKR-Tek/apex-v2_qr/contents/index.html?t=" + Date.now(), {
           headers: { "Accept": "application/vnd.github.v3.raw" },
           cache: "no-store"
         })
